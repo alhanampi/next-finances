@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "if": "Write(*docs*)",
+            "command": "$json = [Console]::In.ReadToEnd(); $data = $json | ConvertFrom-Json; $fp = $data.tool_input.file_path; if ($fp -match 'docs') { @{ hookSpecificOutput = @{ hookEventName = 'PostToolUse'; additionalContext = ('New file added to docs: ' + $fp + '. Please update the nearest CLAUDE.md to reference this file — add it under a ## Docs section with a one-line description of its content.') } } | ConvertTo-Json -Compress }",
+            "statusMessage": "Checking docs for CLAUDE.md update...",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

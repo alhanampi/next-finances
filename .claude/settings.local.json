@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\CODE\\\\2026\\\\claude training\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(Format-Table)",
+      "Bash(npx tsx *)",
+      "Bash(git checkout *)",
+      "Bash(git push *)",
+      "Bash(Select-Object Name, Mode)",
+      "Bash(Format-Table -AutoSize)",
+      "PowerShell($json = Get-Content \"C:\\\\CODE\\\\2026\\\\claude training\\\\01-lifting-daily\\\\.claude\\\\settings.json\" -Raw | ConvertFrom-Json; $json.hooks.PostToolUse[0].hooks[0].type)",
+      "Bash(git stash *)",
+      "Bash(git pull *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git merge *)",
+      "Bash(npx shadcn@latest add dialog alert-dialog --yes)"
+    ]
+  }
+}
