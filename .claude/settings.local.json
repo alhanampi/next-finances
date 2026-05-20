@@ -14,7 +14,9 @@
       "Bash(git pull *)",
       "Bash(git commit -m ' *)",
       "Bash(git merge *)",
-      "Bash(npx shadcn@latest add dialog alert-dialog --yes)"
+      "Bash(npx shadcn@latest add dialog alert-dialog --yes)",
+      "Bash(Test-Path *)",
+      "Skill(schedule)"
     ]
   }
 }
