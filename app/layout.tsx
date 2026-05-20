@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import { ChartColumnBigIcon } from "lucide-react";
+import Link from "next/link";
+import {
+  ClerkProvider,
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +30,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className={cn("h-full antialiased", poppins.variable)}>
+        <body className="min-h-full flex flex-col font-sans">
+          <nav className="bg-primary p-4 text-white h-20 flex items-center justify-between ">
+            <Link
+              href="/"
+              className="font-bold text-2xl flex gap-1 items-center"
+            >
+              <ChartColumnBigIcon className="text-lime-500" /> Next Finance App
+            </Link>
+            {/* <div>menu</div> */}
+            <div>
+              <Show when="signed-out">
+                <SignInButton>
+                  <Button variant="ghost">Sign In</Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button className="ml-2">Sign Up</Button>
+                </SignUpButton>
+              </Show>
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
+            </div>
+          </nav>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
